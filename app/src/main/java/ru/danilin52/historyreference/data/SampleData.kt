@@ -4,6 +4,7 @@ object SampleData {
 
     val events = listOf(
         HistoricalEvent(
+            id = 1,
             date = "1240-07-15",
             title = "Невская битва",
             description = "Александр Невский разбил шведский отряд на реке Неве, за что получил своё прозвище.",
@@ -13,6 +14,7 @@ object SampleData {
             imageUrl = null
         ),
         HistoricalEvent(
+            id = 2,
             date = "1380-09-08",
             title = "Куликовская битва",
             description = "Дмитрий Донской одержал победу над войском Мамая, ставшую символом объединения русских земель.",
@@ -22,6 +24,7 @@ object SampleData {
             imageUrl = null
         ),
         HistoricalEvent(
+            id = 3,
             date = "1869-03-06",
             title = "Открытие периодического закона",
             description = "Дмитрий Менделеев представил периодическую систему химических элементов.",
@@ -31,6 +34,7 @@ object SampleData {
             imageUrl = null
         ),
         HistoricalEvent(
+            id = 4,
             date = "1961-04-12",
             title = "Первый полёт человека в космос",
             description = "Юрий Гагарин совершил первый в истории полёт в космос на корабле «Восток-1».",
@@ -40,6 +44,7 @@ object SampleData {
             imageUrl = null
         ),
         HistoricalEvent(
+            id = 5,
             date = "1812-09-07",
             title = "Бородинское сражение",
             description = "Крупнейшее сражение Отечественной войны 1812 года между русской и французской армиями.",
@@ -52,6 +57,7 @@ object SampleData {
 
     val persons = listOf(
         Person(
+            id = 1,
             name = "Александр Невский",
             birthYear = 1221,
             deathYear = 1263,
@@ -60,6 +66,7 @@ object SampleData {
             occupation = "Полководец, князь"
         ),
         Person(
+            id = 2,
             name = "Дмитрий Донской",
             birthYear = 1350,
             deathYear = 1389,
@@ -68,6 +75,7 @@ object SampleData {
             occupation = "Князь"
         ),
         Person(
+            id = 3,
             name = "Дмитрий Менделеев",
             birthYear = 1834,
             deathYear = 1907,
@@ -76,6 +84,7 @@ object SampleData {
             occupation = "Учёный-химик"
         ),
         Person(
+            id = 4,
             name = "Юрий Гагарин",
             birthYear = 1934,
             deathYear = 1968,
@@ -84,6 +93,7 @@ object SampleData {
             occupation = "Космонавт"
         ),
         Person(
+            id = 5,
             name = "Михаил Кутузов",
             birthYear = 1745,
             deathYear = 1813,
@@ -92,8 +102,6 @@ object SampleData {
             occupation = "Полководец"
         )
     )
-
-    data class Link(val eventTitle: String, val personName: String, val role: EventPersonRole)
 
     val links: List<Triple<String, String, EventPersonRole>> = listOf(
         Triple("Невская битва", "Александр Невский", EventPersonRole.INITIATOR),
