@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="history_primary">#6D4C41</color>
+    <color name="history_primary_dark">#4E342E</color>
+    <color name="history_background">#FFF8F3</color>
+</resources>

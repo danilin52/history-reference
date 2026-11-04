@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Исторический справочник</string>
+    <string name="tab_events">События</string>
+    <string name="tab_persons">Личности</string>
+    <string name="search_person_hint">Поиск по имени или роду деятельности</string>
+    <string name="on_this_day_channel">В этот день</string>
+    <string name="on_this_day_title">В этот день…</string>
+</resources>

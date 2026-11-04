@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.HistoryReference" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/history_background</item>
+        <item name="android:statusBarColor">@color/history_primary_dark</item>
+    </style>
+</resources>
