@@ -25,18 +25,17 @@ Kotlin · Jetpack Compose (Material 3) · Room (KSP) · Retrofit + Gson · Coil 
 
 ## 📦 Структура проекта
 
-app/src/main/java/ru/danilin52/historyreference/
-├── data/            # сущности, DAO, база, репозиторий, демо-данные, Retrofit
-├── notifications/   # ежедневное уведомление «В этот день…»
-├── ui/
-│   ├── components/  # анимированная карточка события
-│   ├── events/      # список событий
-│   ├── persons/     # поиск по личности
-│   ├── detail/      # детальные экраны
-│   ├── nav/         # навигация
-│   └── theme/       # тема
-├── HistoryApp.kt
-└── MainActivity.kt
+- `data/` — сущности, DAO, база данных, репозиторий, демо-данные, Retrofit
+- `notifications/` — ежедневное уведомление «В этот день…»
+- `ui/components/` — анимированная карточка события
+- `ui/events/` — список событий
+- `ui/persons/` — поиск по личности
+- `ui/detail/` — детальные экраны
+- `ui/nav/` — навигация
+- `ui/theme/` — тема
+- `HistoryApp.kt` — инициализация приложения
+- `MainActivity.kt` — точка входа
+
 ## 🚀 Сборка
 
 1. Откройте папку проекта в Android Studio (Giraffe+ / Ladybug).
