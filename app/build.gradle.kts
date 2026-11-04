@@ -8,6 +8,7 @@ plugins {
 android {
     namespace = "ru.danilin52.historyreference"
     compileSdk = 35
+    buildToolsVersion = "36.0.0"
 
     defaultConfig {
         applicationId = "ru.danilin52.historyreference"
