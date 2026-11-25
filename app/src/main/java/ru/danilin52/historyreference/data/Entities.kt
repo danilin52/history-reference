@@ -55,3 +55,10 @@ data class EventPerson(
     val personId: Long,
     val role: EventPersonRole
 )
+
+data class EventPersonItem(
+    val eventId: Long,
+    val personId: Long,
+    val role: EventPersonRole,
+    val personName: String
+)

@@ -9,11 +9,15 @@ import ru.danilin52.historyreference.ui.main.MainScreen
 @Composable
 fun AppNav() {
     val context = LocalContext.current
-    val repository = (context.applicationContext as HistoryApp).repository
+    val app = context.applicationContext as HistoryApp
+    val repository = app.repository
 
     LaunchedEffect(Unit) {
         repository.ensureSeeded()
     }
 
-    MainScreen(repository = repository)
+    MainScreen(
+        repository = repository,
+        preferences = app.preferences
+    )
 }

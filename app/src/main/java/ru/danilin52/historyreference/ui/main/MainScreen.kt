@@ -18,16 +18,24 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import ru.danilin52.historyreference.data.HistoryRepository
+import ru.danilin52.historyreference.preferences.UserPreferences
 import ru.danilin52.historyreference.ui.detail.EventDetailScreen
 import ru.danilin52.historyreference.ui.detail.PersonDetailScreen
+import ru.danilin52.historyreference.ui.events.EventFormScreen
 import ru.danilin52.historyreference.ui.events.EventListScreen
+import ru.danilin52.historyreference.ui.events.EventPeopleScreen
 import ru.danilin52.historyreference.ui.nav.AppRoutes
 import ru.danilin52.historyreference.ui.nav.topLevelDestinations
 import ru.danilin52.historyreference.ui.onthisday.OnThisDayScreen
 import ru.danilin52.historyreference.ui.persons.PersonSearchScreen
+import ru.danilin52.historyreference.ui.persons.PersonFormScreen
+import ru.danilin52.historyreference.ui.settings.SettingsScreen
 
 @Composable
-fun MainScreen(repository: HistoryRepository) {
+fun MainScreen(
+    repository: HistoryRepository,
+    preferences: UserPreferences
+) {
     val tabNav = rememberNavController()
     val backStackEntry by tabNav.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
@@ -76,14 +84,16 @@ fun MainScreen(repository: HistoryRepository) {
             composable(AppRoutes.EVENTS) {
                 EventListScreen(
                     repository = repository,
-                    onEventClick = { id -> tabNav.navigate(AppRoutes.eventDetail(id)) }
+                    onEventClick = { id -> tabNav.navigate(AppRoutes.eventDetail(id)) },
+                    onAddEvent = { tabNav.navigate(AppRoutes.EVENT_CREATE) }
                 )
             }
 
             composable(AppRoutes.PERSONS) {
                 PersonSearchScreen(
                     repository = repository,
-                    onPersonClick = { id -> tabNav.navigate(AppRoutes.personDetail(id)) }
+                    onPersonClick = { id -> tabNav.navigate(AppRoutes.personDetail(id)) },
+                    onAddPerson = { tabNav.navigate(AppRoutes.PERSON_CREATE) }
                 )
             }
 
@@ -91,6 +101,22 @@ fun MainScreen(repository: HistoryRepository) {
                 OnThisDayScreen(
                     repository = repository,
                     onEventClick = { id -> tabNav.navigate(AppRoutes.eventDetail(id)) }
+                )
+            }
+
+            composable(AppRoutes.SETTINGS) {
+                SettingsScreen(preferences = preferences)
+            }
+
+            composable(AppRoutes.EVENT_CREATE) {
+                EventFormScreen(
+                    repository = repository,
+                    eventId = null,
+                    onBack = { tabNav.popBackStack() },
+                    onSaved = { id ->
+                        tabNav.popBackStack()
+                        tabNav.navigate(AppRoutes.eventDetail(id))
+                    }
                 )
             }
 
@@ -105,6 +131,50 @@ fun MainScreen(repository: HistoryRepository) {
                     onBack = { tabNav.popBackStack() },
                     onPersonClick = { personId ->
                         tabNav.navigate(AppRoutes.personDetail(personId))
+                    },
+                    onEdit = { tabNav.navigate(AppRoutes.eventEdit(id)) },
+                    onDeleted = {
+                        if (!tabNav.popBackStack(AppRoutes.EVENTS, inclusive = false)) {
+                            tabNav.navigate(AppRoutes.EVENTS)
+                        }
+                    },
+                    onManagePeople = { tabNav.navigate(AppRoutes.eventPeople(id)) }
+                )
+            }
+
+            composable(
+                route = AppRoutes.EVENT_EDIT,
+                arguments = listOf(navArgument(AppRoutes.EVENT_ID) { type = NavType.LongType })
+            ) { entry ->
+                val id = entry.arguments?.getLong(AppRoutes.EVENT_ID) ?: return@composable
+                EventFormScreen(
+                    repository = repository,
+                    eventId = id,
+                    onBack = { tabNav.popBackStack() },
+                    onSaved = { tabNav.popBackStack() }
+                )
+            }
+
+            composable(
+                route = AppRoutes.EVENT_PEOPLE,
+                arguments = listOf(navArgument(AppRoutes.EVENT_ID) { type = NavType.LongType })
+            ) { entry ->
+                val id = entry.arguments?.getLong(AppRoutes.EVENT_ID) ?: return@composable
+                EventPeopleScreen(
+                    repository = repository,
+                    eventId = id,
+                    onBack = { tabNav.popBackStack() }
+                )
+            }
+
+            composable(AppRoutes.PERSON_CREATE) {
+                PersonFormScreen(
+                    repository = repository,
+                    personId = null,
+                    onBack = { tabNav.popBackStack() },
+                    onSaved = { id ->
+                        tabNav.popBackStack()
+                        tabNav.navigate(AppRoutes.personDetail(id))
                     }
                 )
             }
@@ -120,7 +190,26 @@ fun MainScreen(repository: HistoryRepository) {
                     onBack = { tabNav.popBackStack() },
                     onEventClick = { eventId ->
                         tabNav.navigate(AppRoutes.eventDetail(eventId))
+                    },
+                    onEdit = { tabNav.navigate(AppRoutes.personEdit(id)) },
+                    onDeleted = {
+                        if (!tabNav.popBackStack(AppRoutes.PERSONS, inclusive = false)) {
+                            tabNav.navigate(AppRoutes.PERSONS)
+                        }
                     }
+                )
+            }
+
+            composable(
+                route = AppRoutes.PERSON_EDIT,
+                arguments = listOf(navArgument(AppRoutes.PERSON_ID) { type = NavType.LongType })
+            ) { entry ->
+                val id = entry.arguments?.getLong(AppRoutes.PERSON_ID) ?: return@composable
+                PersonFormScreen(
+                    repository = repository,
+                    personId = id,
+                    onBack = { tabNav.popBackStack() },
+                    onSaved = { tabNav.popBackStack() }
                 )
             }
         }

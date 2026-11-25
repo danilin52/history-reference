@@ -11,8 +11,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -32,7 +36,8 @@ import ru.danilin52.historyreference.data.HistoryRepository
 @Composable
 fun PersonSearchScreen(
     repository: HistoryRepository,
-    onPersonClick: (Long) -> Unit
+    onPersonClick: (Long) -> Unit,
+    onAddPerson: () -> Unit
 ) {
     var query by remember { mutableStateOf("") }
     val results by remember(query) { repository.searchPersons(query) }
@@ -41,6 +46,11 @@ fun PersonSearchScreen(
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("Личности") })
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = onAddPerson) {
+                Icon(Icons.Filled.Add, contentDescription = "Добавить личность")
+            }
         }
     ) { padding ->
         Column(

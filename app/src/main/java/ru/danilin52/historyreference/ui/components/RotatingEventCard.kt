@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import ru.danilin52.historyreference.data.EventCategory
+import ru.danilin52.historyreference.data.EventPersonRole
 import ru.danilin52.historyreference.data.HistoricalEvent
 
 @Composable
@@ -81,4 +82,10 @@ fun categoryLabel(category: EventCategory): String = when (category) {
     EventCategory.POLITICS -> "Политика"
     EventCategory.EXPLORATION -> "География"
     EventCategory.OTHER -> "Другое"
+}
+
+fun roleLabel(role: EventPersonRole): String = when (role) {
+    EventPersonRole.PARTICIPANT -> "Участник"
+    EventPersonRole.WITNESS -> "Свидетель"
+    EventPersonRole.INITIATOR -> "Инициатор"
 }

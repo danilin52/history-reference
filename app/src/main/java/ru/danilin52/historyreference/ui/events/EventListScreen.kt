@@ -6,7 +6,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -22,13 +26,19 @@ import ru.danilin52.historyreference.ui.components.RotatingEventCard
 @Composable
 fun EventListScreen(
     repository: HistoryRepository,
-    onEventClick: (Long) -> Unit
+    onEventClick: (Long) -> Unit,
+    onAddEvent: () -> Unit
 ) {
     val events by repository.events.collectAsStateWithLifecycle(initialValue = emptyList())
 
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("События") })
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = onAddEvent) {
+                Icon(Icons.Filled.Add, contentDescription = "Добавить событие")
+            }
         }
     ) { padding ->
         LazyColumn(
